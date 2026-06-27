@@ -1,1 +1,426 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+  <title>Kureyşî Aşireti · Soyağacı Atlası</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
+    body {
+      background-color: #0d0d0d;
+      color: #ffffff;
+      font-family: 'Segoe UI', Roboto, system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+
+    h1, h2, h3, h4, .serif {
+      font-family: 'Georgia', 'Times New Roman', Times, serif;
+      letter-spacing: 0.02em;
+    }
+
+    .gold {
+      color: #d4af37;
+    }
+    .gold-bg {
+      background-color: #d4af37;
+      color: #0d0d0d;
+    }
+    .border-gold {
+      border-color: #d4af37;
+    }
+    .bg-dark-card {
+      background-color: #1a1a1a;
+    }
+    .bg-deep {
+      background-color: #0d0d0d;
+    }
+    .text-zumrut {
+      color: #5f8b6b;
+    }
+
+    /* sabit nav */
+    .sticky-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13, 13, 13, 0.92);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid #d4af37;
+      padding: 0.6rem 1.2rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .nav-logo img {
+      width: 44px;
+      height: 44px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 1px solid #d4af37;
+      background: #1a1a1a;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem 1.2rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    .nav-links a {
+      color: #f0f0f0;
+      text-decoration: none;
+      transition: color 0.2s;
+      border-bottom: 1px solid transparent;
+    }
+    .nav-links a:hover {
+      color: #d4af37;
+      border-bottom-color: #d4af37;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 1.2rem 1.2rem 2rem;
+    }
+
+    /* hero */
+    .hero {
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: radial-gradient(circle at 20% 30%, #1e1a0e, #0d0d0d 80%);
+      border-bottom: 1px solid #d4af37;
+      padding: 2rem 1rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.4rem, 12vw, 4.8rem);
+      font-weight: 700;
+      color: #d4af37;
+      text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+      letter-spacing: 0.08em;
+    }
+    .hero .sub {
+      font-size: clamp(1rem, 4vw, 1.8rem);
+      color: #e0d6b0;
+      margin-top: 0.4rem;
+      border-top: 2px solid #d4af37;
+      display: inline-block;
+      padding: 0.2rem 2rem;
+    }
+    .hero .btn-gold {
+      margin-top: 2rem;
+      background: #d4af37;
+      color: #0d0d0d;
+      font-weight: 700;
+      padding: 0.8rem 2.4rem;
+      border-radius: 50px;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 1.1rem;
+      transition: 0.2s;
+      border: 1px solid #d4af37;
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+    }
+    .hero .btn-gold:hover {
+      background: #b8962e;
+      transform: scale(1.02);
+    }
+
+    /* bölüm başlıkları */
+    .section-title {
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      color: #d4af37;
+      border-left: 6px solid #d4af37;
+      padding-left: 1rem;
+      margin: 2.5rem 0 1.5rem 0;
+      font-weight: 600;
+    }
+    .section-sub {
+      color: #c0b280;
+      font-size: 1rem;
+      margin-top: -0.8rem;
+      margin-bottom: 1.8rem;
+    }
+
+    /* kartlar grid */
+    .grid-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 1.8rem;
+      margin: 1.5rem 0;
+    }
+    .card {
+      background: #171717;
+      border-radius: 20px;
+      padding: 1.5rem 1.2rem;
+      border: 1px solid #2a2a2a;
+      transition: all 0.25s ease;
+      box-shadow: 0 8px 0 #0a0a0a;
+    }
+    .card:hover {
+      border-color: #d4af37;
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+      transform: translateY(-4px);
+    }
+    .card h3 {
+      color: #d4af37;
+      font-size: 1.4rem;
+      border-bottom: 1px solid #333;
+      padding-bottom: 0.4rem;
+      margin-bottom: 0.8rem;
+    }
+    .card .badge {
+      display: inline-block;
+      background: #2a241a;
+      color: #d4af37;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.2rem 0.8rem;
+      border-radius: 30px;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.5rem;
+    }
+    .card p {
+      font-size: 0.95rem;
+      color: #cfcfcf;
+      margin-bottom: 0.4rem;
+    }
+    .card .meta {
+      color: #a09070;
+      font-size: 0.85rem;
+    }
+
+    /* hikaye kutuları */
+    .story-box {
+      background: #141414;
+      border-left: 6px solid #d4af37;
+      border-radius: 12px;
+      padding: 1.6rem 1.8rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+    }
+    .story-box h3 {
+      color: #d4af37;
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+    }
+    .story-box p {
+      color: #dddddd;
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+
+    /* atlas */
+    .atlas-area {
+      background: #121212;
+      border-radius: 24px;
+      padding: 1.8rem 0.8rem;
+      text-align: center;
+      border: 1px solid #2a2a2a;
+    }
+    .atlas-area img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.7);
+      background: #1f1f1f;
+    }
+    .atlas-area .caption {
+      margin-top: 0.8rem;
+      color: #b8b09a;
+      font-style: italic;
+      font-size: 0.95rem;
+    }
+
+    /* form embed */
+    .form-wrapper {
+      background: #121212;
+      border-radius: 28px;
+      padding: 0.4rem 0.2rem 0.2rem 0.2rem;
+      border: 1px solid #2f2f2f;
+      overflow: hidden;
+      margin: 2rem 0 1rem;
+    }
+    .form-wrapper iframe {
+      width: 100%;
+      height: 1200px;
+      border: 0;
+      display: block;
+      background: #0d0d0d;
+      border-radius: 24px;
+    }
+
+    /* mobil düzeltmeler */
+    @media (max-width: 640px) {
+      .sticky-nav {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.4rem;
+        padding: 0.6rem 0.8rem;
+      }
+      .nav-links {
+        justify-content: center;
+        gap: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+      }
+      .hero {
+        min-height: 60vh;
+        padding: 1.2rem 0.5rem;
+      }
+      .grid-cards {
+        grid-template-columns: 1fr;
+      }
+      .section-title {
+        font-size: 1.8rem;
+      }
+      .story-box {
+        padding: 1.2rem;
+      }
+      .card {
+        padding: 1.2rem;
+      }
+      .form-wrapper iframe {
+        height: 1000px;
+      }
+      .nav-logo img {
+        width: 36px;
+        height: 36px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 2.4rem;
+      }
+      .hero .sub {
+        font-size: 1rem;
+        padding: 0 0.5rem;
+      }
+      .container {
+        padding: 0.6rem 0.8rem;
+      }
+      .form-wrapper iframe {
+        height: 800px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SABİT NAV -->
+  <nav class="sticky-nav">
+    <div class="nav-logo">
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%231a1a1a' stroke='%23d4af37' stroke-width='2'/%3E%3Ctext x='50' y='62' font-size='38' text-anchor='middle' fill='%23d4af37' font-family='serif' font-weight='bold'%3EK%3C/text%3E%3C/svg%3E" alt="Kureyşî Logo" style="background:#111;">
+      <span style="color:#d4af37; font-weight:600; font-size:1.1rem;">KUREYŞÎ</span>
+    </div>
+    <div class="nav-links">
+      <a href="#">Ana Sayfa</a>
+      <a href="#tarihce">Tarihçemiz</a>
+      <a href="#malbatlar">Malbatlar</a>
+      <a href="#hikayeler">Sülale Hikayeleri</a>
+      <a href="#atlas">Soyağacı Atlası</a>
+      <a href="#form">Bilgi Ekle</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="ana-sayfa">
+    <h1>KUREYŞÎ AŞİRETİ</h1>
+    <div class="sub">〓 Mazıdağı 〓</div>
+    <a href="#form" class="btn-gold">✦ Soyağacına İsim Yazdır ✦</a>
+  </section>
+
+  <div class="container">
+
+    <!-- TARİHÇE -->
+    <section id="tarihce">
+      <h2 class="section-title">Tarihçemiz · Manifesto</h2>
+      <div style="background:#171717; padding:1.8rem; border-radius:24px; border:1px solid #2a2a2a;">
+        <p style="font-size:1.05rem; color:#e0e0e0; line-height:1.9;">
+          <span class="gold">Kureyşî Aşireti</span>, asırlardır Mazıdağı ve çevresinde kök salmış, zamanla 7-8 köye (Birkê, Xuduri, Kûrê, Cevzat, Cinnê, Binxet) ve büyük şehirlere (Diyarbakır, Adana, İstanbul) dağılmış kadim bir sülaledir. 
+          Aşiretin merkezi bir ağası veya reisi yoktur; göçlerle birlikte yapı, her biri kendi içinde güçlü bağlara sahip <span class="gold">malbatlara</span> (büyük aile gruplarına) evrilmiştir. 
+          Bu dağınık ama birbirine kenetlenmiş yapı, Kureyşî kimliğinin sosyolojik zenginliğini oluşturur. 
+        </p>
+      </div>
+    </section>
+
+    <!-- MALBATLAR -->
+    <section id="malbatlar">
+      <h2 class="section-title">Malbatlarımız</h2>
+      <div class="grid-cards">
+        <!-- CARD 1 -->
+        <div class="card"><h3>Aydar Malbatı</h3><span class="badge">Çekirdek Hat · Diyarbakır</span><p><strong>Yerleşim:</strong> Birkê (Işıkyaka) &amp; Diyarbakır Sur (Kore Mah.)</p><p><span class="meta">Hane: Mala Hesenê Abdilkerîm, Mala Hacî Davûdê Hesen, Mala Hisênê Birkî</span></p><p class="meta">Ticaret: Geleneksel Peynircilik &amp; Hayvancılık</p></div>
+        <!-- CARD 2 -->
+        <div class="card"><h3>Aydın Malbatı</h3><span class="badge">Birkê Yerleşik · Abdo Kolu</span><p><strong>Yerleşim:</strong> Birkê (Işıkyaka)</p><p><span class="meta">Kökü: 1. Musa oğlu Abdo nesli (Hesenê Abdo / Hasan Aydın hattı)</span></p><p class="meta">Nüfus tescil hatasıyla farklı soyadı almış, 70 yıldır sarsılmaz kan bağıyla bağlı kandaş kolumuzdur.</p></div>
+        <!-- CARD 3 -->
+        <div class="card"><h3>Bulut Sülalesi</h3><span class="badge">Xuduri Kolu</span><p><strong>Yerleşim:</strong> Xuduri (Yeşilköy) &amp; Diyarbakır</p><p><span class="meta">Sektör: Müteahhitlik</span></p><p class="meta">Vefa: Dicle Üniversitesi Tıp Fakültesi Kalp ve Onkoloji Hastanelerine kazandırılan "Mehmet Sıddık Bulut anısına" hayrat bekleme salonları.</p></div>
+        <!-- CARD 4 -->
+        <div class="card"><h3>İyikul Malbatı</h3><span class="badge">Öz Kandaş</span><p>1. Musa dedenin öz kardeşi veya bavpîsi (baba amcası) kolundan gelen, resmi kütük tescilinde bu soyadı alan öz be öz Kureyşî kandaş ailemiz.</p></div>
+        <!-- CARD 5 -->
+        <div class="card"><h3>Kaçira Malbatı</h3><span class="badge">Tescil Aşamasında</span><p>Kureyşî gövdesinin ayrılmaz parçası olan, güncel hane reisleri ve soy hatları tescil aşamasında olan kandaş ailemiz.</p></div>
+        <!-- CARD 6 -->
+        <div class="card"><h3>Mala Balo</h3><span class="badge">Kûrê Kolu</span><p><strong>Yerleşim:</strong> Kûrê (Aşağıocak)</p><p class="meta">Avgevra Kevn'den yaşanan parçalanmada Kûrê köyüne yerleşen Kureyşî kolumuzdur.</p></div>
+      </div>
+    </section>
+
+    <!-- HİKAYELER -->
+    <section id="hikayeler">
+      <h2 class="section-title">Sülale Hikayeleri</h2>
+      <div class="story-box">
+        <h3>📜 Büyük Göç ve "Ma Bû Xûna Kûrro"</h3>
+        <p>Avgevra Kevn köyündeki ahıra bırakılan cenaze husumeti, alınan 7 can ve sülalenin Mazıdağı köylerine dağılma süreci. Birkê köyü Kureyşîler tarafından sıfırdan inşa edilmiştir. İzol kökenli Hûsêynîler/Andiçlerin 1850 öncesi yerleşimi ve muhtarlık seçimlerindeki müttefiklik dengesi, aşiret hafızasında derin izler bırakmıştır.</p>
+      </div>
+      <div class="story-box">
+        <h3>⚔️ Şehit Musa'nın Bağdat Destanı</h3>
+        <p>1.7.1890 doğumlu Mehmet oğlu Musa, Hilafet sancağı altında Kut'ül Amâre zaferine giden süreçte İstihkam Eri olarak mücadele etmiş ve 14 Ocak 1916'da Bağdat 2. Hilal-i Ahmer Hastanesinde şehadet şerbetini içmiştir. Emanetlerine kardeşi Hasan sahip çıkmış, bu destan nesiller boyu anlatılmıştır.</p>
+      </div>
+      <div class="story-box">
+        <h3>🌿 Hüseyin Aydar (Sofi Hüseyin) Asalet Mücadelesi</h3>
+        <p>Birkê'den çıkıp Kabî'ye yerleşen Hüseyin Aydar, Sakarya Karasu dağlarında 8 yıl çadırda fındık açmış ve oraya "Hüseyin Ağa'nın Konağı" denmiştir. Amcalarının dükkanını sabaha kadar tek başına nöbetle korumuş, büyük fındık dolandırıcılığında işçilerin parasını cebinden ödeyerek iflas etme asaleti göstermiştir. Aynı zamanda Bismil Cengiz köyünde Şeyh Heybetullah'ın müridi olmuştur.</p>
+      </div>
+    </section>
+
+    <!-- SOYAĞACI ATLASI -->
+    <section id="atlas">
+      <h2 class="section-title">Soyağacı Atlası</h2>
+      <div class="atlas-area">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 500'%3E%3Crect width='800' height='500' fill='%23131313'/%3E%3Ccircle cx='400' cy='100' r='40' fill='%23d4af37' opacity='0.8'/%3E%3Ctext x='400' y='110' text-anchor='middle' fill='%230d0d0d' font-weight='bold' font-size='22' font-family='serif'%3E1. MUSA%3C/text%3E%3Cline x1='400' y1='140' x2='200' y2='240' stroke='%23d4af37' stroke-width='2'/%3E%3Cline x1='400' y1='140' x2='600' y2='240' stroke='%23d4af37' stroke-width='2'/%3E%3Ccircle cx='200' cy='260' r='30' fill='%232a2a2a' stroke='%23d4af37' stroke-width='2'/%3E%3Ctext x='200' y='266' text-anchor='middle' fill='%23d4af37' font-size='14'%3EAydar%3C/text%3E%3Ccircle cx='600' cy='260' r='30' fill='%232a2a2a' stroke='%23d4af37' stroke-width='2'/%3E%3Ctext x='600' y='266' text-anchor='middle' fill='%23d4af37' font-size='14'%3EAydın%3C/text%3E%3Ccircle cx='300' cy='360' r='26' fill='%231f1f1f' stroke='%23b8962e' stroke-width='1.5'/%3E%3Ctext x='300' y='366' text-anchor='middle' fill='%23d4af37' font-size='12'%3EBulut%3C/text%3E%3Ccircle cx='500' cy='360' r='26' fill='%231f1f1f' stroke='%23b8962e' stroke-width='1.5'/%3E%3Ctext x='500' y='366' text-anchor='middle' fill='%23d4af37' font-size='12'%3Eİyikul%3C/text%3E%3Ccircle cx='100' cy='430' r='24' fill='%231f1f1f' stroke='%2399865e' stroke-width='1'/%3E%3Ctext x='100' y='436' text-anchor='middle' fill='%23d4af37' font-size='12'%3EKaçira%3C/text%3E%3Ccircle cx='700' cy='430' r='24' fill='%231f1f1f' stroke='%2399865e' stroke-width='1'/%3E%3Ctext x='700' y='436' text-anchor='middle' fill='%23d4af37' font-size='12'%3EMala Balo%3C/text%3E%3C/svg%3E"
+             alt="Soyağacı Atlası (şematik)" style="max-width:100%; background:#111;">
+        <div class="caption">Bu atlas, sülalemizin bilinen en üst kuşaklarından itibaren birbirine bağlanan kollarını göstermektedir. Detayları parmaklarınızla yakınlaştırarak inceleyebilirsiniz.</div>
+      </div>
+    </section>
+
+    <!-- FORM -->
+    <section id="form">
+      <h2 class="section-title">İletişim &amp; Bilgi Ekle</h2>
+      <div class="form-wrapper">
+        <!-- Google Forms Embed (responsive)  -->
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe9zL02NyqyYj3T2bQj8I5M_WlNk3LZDJhYXyX2gBwYo9_3mQ/viewform?embedded=true" width="100%" height="1200" frameborder="0" marginheight="0" marginwidth="0">Yükleniyor…</iframe>
+      </div>
+    </section>
+
+    <!-- alt bilgi -->
+    <footer style="text-align:center; padding:2rem 0 0.8rem; border-top:1px solid #2a2a2a; margin-top:1.8rem; color:#6a6a6a; font-size:0.8rem;">
+      <span class="gold">KUREYŞÎ AŞİRETİ</span> · Mazıdağı / Diyarbakır · 2026
+    </footer>
+  </div>
+</body>
+</html>

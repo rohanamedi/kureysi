@@ -1,429 +1,638 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
-  <title>Kureyşî Aşireti · Soyağacı Atlası</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+    <title>Kureyşî Aşireti · Ana Sayfa</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      background-color: #0d0d0d;
-      color: #ffffff;
-      font-family: 'Segoe UI', Roboto, system-ui, -apple-system, 'Helvetica Neue', sans-serif;
-      line-height: 1.6;
-      scroll-behavior: smooth;
-    }
+        body {
+            background-color: #0a0a0a;
+            color: #ffffff;
+            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
 
-    h1, h2, h3, h4, .serif {
-      font-family: 'Georgia', 'Times New Roman', Times, serif;
-      letter-spacing: 0.02em;
-    }
+        h1, h2, h3, h4 {
+            font-family: 'Georgia', 'Times New Roman', Times, serif;
+            letter-spacing: 0.02em;
+        }
 
-    .gold {
-      color: #d4af37;
-    }
-    .gold-bg {
-      background-color: #d4af37;
-      color: #0d0d0d;
-    }
-    .border-gold {
-      border-color: #d4af37;
-    }
-    .bg-dark-card {
-      background-color: #1a1a1a;
-    }
-    .bg-deep {
-      background-color: #0d0d0d;
-    }
-    .text-zumrut {
-      color: #5f8b6b;
-    }
+        .gold {
+            color: #d4af37;
+        }
+        .gold-border {
+            border-color: #d4af37;
+        }
 
-    /* sabit nav */
-    .sticky-nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(13, 13, 13, 0.92);
-      backdrop-filter: blur(6px);
-      border-bottom: 1px solid #d4af37;
-      padding: 0.6rem 1.2rem;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-    }
+        /* ===== ARKA PLAN ===== */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, #1a1408 0%, #0a0a0a 70%);
+            z-index: -2;
+        }
 
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .nav-logo img {
-      width: 44px;
-      height: 44px;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 1px solid #d4af37;
-      background: #1a1a1a;
-    }
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.03) 0%, transparent 70%);
+            z-index: -1;
+        }
 
-    .nav-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem 1.2rem;
-      font-size: 0.9rem;
-      font-weight: 500;
-    }
-    .nav-links a {
-      color: #f0f0f0;
-      text-decoration: none;
-      transition: color 0.2s;
-      border-bottom: 1px solid transparent;
-    }
-    .nav-links a:hover {
-      color: #d4af37;
-      border-bottom-color: #d4af37;
-    }
+        /* ===== ANA SAYFA ===== */
+        .home-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 2rem 1.5rem;
+            position: relative;
+        }
 
-    .container {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 1.2rem 1.2rem 2rem;
-    }
+        /* ===== KÖŞE KARTLARI ===== */
+        .corner-cards {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
 
-    /* hero */
-    .hero {
-      min-height: 70vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      background: radial-gradient(circle at 20% 30%, #1e1a0e, #0d0d0d 80%);
-      border-bottom: 1px solid #d4af37;
-      padding: 2rem 1rem;
-    }
-    .hero h1 {
-      font-size: clamp(2.4rem, 12vw, 4.8rem);
-      font-weight: 700;
-      color: #d4af37;
-      text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
-      letter-spacing: 0.08em;
-    }
-    .hero .sub {
-      font-size: clamp(1rem, 4vw, 1.8rem);
-      color: #e0d6b0;
-      margin-top: 0.4rem;
-      border-top: 2px solid #d4af37;
-      display: inline-block;
-      padding: 0.2rem 2rem;
-    }
-    .hero .btn-gold {
-      margin-top: 2rem;
-      background: #d4af37;
-      color: #0d0d0d;
-      font-weight: 700;
-      padding: 0.8rem 2.4rem;
-      border-radius: 50px;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 1.1rem;
-      transition: 0.2s;
-      border: 1px solid #d4af37;
-      box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
-    }
-    .hero .btn-gold:hover {
-      background: #b8962e;
-      transform: scale(1.02);
-    }
+        .corner-card {
+            position: absolute;
+            pointer-events: auto;
+            background: rgba(20, 20, 20, 0.88);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            border-radius: 16px;
+            padding: 1.2rem 1.5rem;
+            max-width: 280px;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+        }
 
-    /* bölüm başlıkları */
-    .section-title {
-      font-size: clamp(1.8rem, 5vw, 2.8rem);
-      color: #d4af37;
-      border-left: 6px solid #d4af37;
-      padding-left: 1rem;
-      margin: 2.5rem 0 1.5rem 0;
-      font-weight: 600;
-    }
-    .section-sub {
-      color: #c0b280;
-      font-size: 1rem;
-      margin-top: -0.8rem;
-      margin-bottom: 1.8rem;
-    }
+        .corner-card:hover {
+            border-color: #d4af37;
+            box-shadow: 0 8px 40px rgba(212, 175, 55, 0.15);
+            transform: translateY(-2px) scale(1.02);
+        }
 
-    /* kartlar grid */
-    .grid-cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-      gap: 1.8rem;
-      margin: 1.5rem 0;
-    }
-    .card {
-      background: #171717;
-      border-radius: 20px;
-      padding: 1.5rem 1.2rem;
-      border: 1px solid #2a2a2a;
-      transition: all 0.25s ease;
-      box-shadow: 0 8px 0 #0a0a0a;
-    }
-    .card:hover {
-      border-color: #d4af37;
-      box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
-      transform: translateY(-4px);
-    }
-    .card h3 {
-      color: #d4af37;
-      font-size: 1.4rem;
-      border-bottom: 1px solid #333;
-      padding-bottom: 0.4rem;
-      margin-bottom: 0.8rem;
-    }
-    .card .badge {
-      display: inline-block;
-      background: #2a241a;
-      color: #d4af37;
-      font-size: 0.7rem;
-      font-weight: 600;
-      padding: 0.2rem 0.8rem;
-      border-radius: 30px;
-      letter-spacing: 0.04em;
-      margin-bottom: 0.5rem;
-    }
-    .card p {
-      font-size: 0.95rem;
-      color: #cfcfcf;
-      margin-bottom: 0.4rem;
-    }
-    .card .meta {
-      color: #a09070;
-      font-size: 0.85rem;
-    }
+        .corner-card h3 {
+            color: #d4af37;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            letter-spacing: 0.05em;
+        }
 
-    /* hikaye kutuları */
-    .story-box {
-      background: #141414;
-      border-left: 6px solid #d4af37;
-      border-radius: 12px;
-      padding: 1.6rem 1.8rem;
-      margin-bottom: 2rem;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
-    }
-    .story-box h3 {
-      color: #d4af37;
-      font-size: 1.5rem;
-      font-weight: 600;
-      margin-bottom: 0.6rem;
-    }
-    .story-box p {
-      color: #dddddd;
-      font-size: 1rem;
-      line-height: 1.8;
-    }
+        .corner-card p {
+            color: #c8c0b0;
+            font-size: 0.82rem;
+            line-height: 1.5;
+            margin: 0;
+            font-weight: 300;
+        }
 
-    /* atlas */
-    .atlas-area {
-      background: #121212;
-      border-radius: 24px;
-      padding: 1.8rem 0.8rem;
-      text-align: center;
-      border: 1px solid #2a2a2a;
-    }
-    .atlas-area img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 12px;
-      box-shadow: 0 0 30px rgba(0,0,0,0.7);
-      background: #1f1f1f;
-    }
-    .atlas-area .caption {
-      margin-top: 0.8rem;
-      color: #b8b09a;
-      font-style: italic;
-      font-size: 0.95rem;
-    }
+        .corner-card .icon {
+            font-size: 1.2rem;
+            margin-right: 0.4rem;
+        }
 
-    /* form embed */
-    .form-wrapper {
-      background: #121212;
-      border-radius: 28px;
-      padding: 0.4rem 0.2rem 0.2rem 0.2rem;
-      border: 1px solid #2f2f2f;
-      overflow: hidden;
-      margin: 2rem 0 1rem;
-    }
-    .form-wrapper iframe {
-      width: 100%;
-      height: 1200px;
-      border: 0;
-      display: block;
-      background: #0d0d0d;
-      border-radius: 24px;
-    }
+        /* Köşe pozisyonları */
+        .corner-tl {
+            top: 2rem;
+            left: 2rem;
+        }
+        .corner-tr {
+            top: 2rem;
+            right: 2rem;
+        }
+        .corner-bl {
+            bottom: 2rem;
+            left: 2rem;
+        }
+        .corner-br {
+            bottom: 2rem;
+            right: 2rem;
+        }
 
-    /* mobil düzeltmeler */
-    @media (max-width: 640px) {
-      .sticky-nav {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0.4rem;
-        padding: 0.6rem 0.8rem;
-      }
-      .nav-links {
-        justify-content: center;
-        gap: 0.4rem 0.8rem;
-        font-size: 0.8rem;
-      }
-      .hero {
-        min-height: 60vh;
-        padding: 1.2rem 0.5rem;
-      }
-      .grid-cards {
-        grid-template-columns: 1fr;
-      }
-      .section-title {
-        font-size: 1.8rem;
-      }
-      .story-box {
-        padding: 1.2rem;
-      }
-      .card {
-        padding: 1.2rem;
-      }
-      .form-wrapper iframe {
-        height: 1000px;
-      }
-      .nav-logo img {
-        width: 36px;
-        height: 36px;
-      }
-    }
+        /* ===== LOGO ALANI ===== */
+        .logo-area {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem;
+        }
 
-    @media (max-width: 480px) {
-      .hero h1 {
-        font-size: 2.4rem;
-      }
-      .hero .sub {
-        font-size: 1rem;
-        padding: 0 0.5rem;
-      }
-      .container {
-        padding: 0.6rem 0.8rem;
-      }
-      .form-wrapper iframe {
-        height: 800px;
-      }
-    }
-  </style>
+        .logo-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 260px;
+            height: 260px;
+            margin-bottom: 2.2rem;
+        }
+
+        /* Yörüngeler (arka planda) */
+        .orbit-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .orbit-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            border: 1px solid rgba(212, 175, 55, 0.08);
+            animation: rotateRing 20s linear infinite;
+            pointer-events: none;
+        }
+
+        .orbit-ring:nth-child(1) { width: 100%; height: 100%; animation-duration: 18s; }
+        .orbit-ring:nth-child(2) { width: 88%; height: 88%; animation-duration: 22s; border-color: rgba(212, 175, 55, 0.06); }
+        .orbit-ring:nth-child(3) { width: 76%; height: 76%; animation-duration: 26s; border-color: rgba(212, 175, 55, 0.05); }
+        .orbit-ring:nth-child(4) { width: 64%; height: 64%; animation-duration: 30s; border-color: rgba(212, 175, 55, 0.04); }
+        .orbit-ring:nth-child(5) { width: 52%; height: 52%; animation-duration: 34s; border-color: rgba(212, 175, 55, 0.03); }
+        .orbit-ring:nth-child(6) { width: 40%; height: 40%; animation-duration: 38s; border-color: rgba(212, 175, 55, 0.02); }
+        .orbit-ring:nth-child(7) { width: 112%; height: 112%; animation-duration: 16s; border-color: rgba(212, 175, 55, 0.07); }
+        .orbit-ring:nth-child(8) { width: 124%; height: 124%; animation-duration: 14s; border-color: rgba(212, 175, 55, 0.05); }
+        .orbit-ring:nth-child(9) { width: 136%; height: 136%; animation-duration: 12s; border-color: rgba(212, 175, 55, 0.04); }
+        .orbit-ring:nth-child(10) { width: 148%; height: 148%; animation-duration: 10s; border-color: rgba(212, 175, 55, 0.03); }
+
+        @keyframes rotateRing {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* Yörünge noktaları */
+        .orbit-dot {
+            position: absolute;
+            border-radius: 50%;
+            background: #d4af37;
+            pointer-events: none;
+            animation: pulseDot 2s ease-in-out infinite;
+        }
+
+        @keyframes pulseDot {
+            0%, 100% { opacity: 0.3; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* Logo resmi */
+        .logo-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(212, 175, 55, 0.5);
+            box-shadow: 0 0 60px rgba(212, 175, 55, 0.1);
+            position: relative;
+            z-index: 3;
+            background: #0a0a0a;
+            transition: all 0.5s ease;
+        }
+
+        .logo-image:hover {
+            box-shadow: 0 0 80px rgba(212, 175, 55, 0.2);
+            border-color: #d4af37;
+        }
+
+        /* ===== BUTON ===== */
+        .btn-wrapper {
+            position: relative;
+            z-index: 3;
+            margin-top: 0.5rem;
+        }
+
+        .btn-gold {
+            display: inline-block;
+            background: linear-gradient(145deg, #d4af37, #b8962e);
+            color: #0a0a0a;
+            font-weight: 700;
+            font-size: 1.05rem;
+            padding: 0.9rem 2.8rem;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid #d4af37;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+            letter-spacing: 0.08em;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-gold::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
+            animation: shine 3s ease-in-out infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.35);
+            background: linear-gradient(145deg, #e0c04a, #c49a2a);
+        }
+
+        .btn-gold .arrow {
+            display: inline-block;
+            margin-left: 0.6rem;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-gold:hover .arrow {
+            transform: translateX(4px);
+        }
+
+        /* ===== MOBİL SLIDER ===== */
+        .mobile-slider {
+            display: none;
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            width: 92%;
+            max-width: 400px;
+            background: rgba(13, 13, 13, 0.92);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 20px;
+            padding: 1rem 1.2rem;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.8);
+            overflow: hidden;
+        }
+
+        .slider-track {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            width: 400%;
+        }
+
+        .slider-slide {
+            width: 25%;
+            flex-shrink: 0;
+            padding: 0.2rem 0.4rem;
+            cursor: pointer;
+        }
+
+        .slider-slide h4 {
+            color: #d4af37;
+            font-size: 0.95rem;
+            margin-bottom: 0.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .slider-slide p {
+            color: #b8b0a0;
+            font-size: 0.75rem;
+            line-height: 1.4;
+            margin: 0;
+        }
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 0.6rem;
+        }
+
+        .slider-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .slider-dot.active {
+            background: #d4af37;
+            width: 20px;
+            border-radius: 4px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .corner-card {
+                max-width: 220px;
+                padding: 0.9rem 1.2rem;
+            }
+            .corner-card h3 {
+                font-size: 0.95rem;
+            }
+            .corner-card p {
+                font-size: 0.72rem;
+            }
+            .corner-tl { top: 1.5rem; left: 1.5rem; }
+            .corner-tr { top: 1.5rem; right: 1.5rem; }
+            .corner-bl { bottom: 1.5rem; left: 1.5rem; }
+            .corner-br { bottom: 1.5rem; right: 1.5rem; }
+            .logo-wrapper { width: 220px; height: 220px; }
+            .logo-image { width: 170px; height: 170px; }
+        }
+
+        @media (max-width: 768px) {
+            .corner-cards {
+                display: none;
+            }
+            .mobile-slider {
+                display: block;
+            }
+            .logo-wrapper {
+                width: 200px;
+                height: 200px;
+            }
+            .logo-image {
+                width: 155px;
+                height: 155px;
+            }
+            .btn-gold {
+                font-size: 0.9rem;
+                padding: 0.7rem 2rem;
+            }
+            .home-page {
+                padding: 1rem 0.8rem;
+                justify-content: center;
+                min-height: 100vh;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-wrapper {
+                width: 170px;
+                height: 170px;
+                margin-bottom: 1.5rem;
+            }
+            .logo-image {
+                width: 130px;
+                height: 130px;
+            }
+            .btn-gold {
+                font-size: 0.8rem;
+                padding: 0.6rem 1.6rem;
+            }
+            .mobile-slider {
+                padding: 0.8rem 1rem;
+                bottom: 1rem;
+            }
+            .slider-slide h4 {
+                font-size: 0.85rem;
+            }
+            .slider-slide p {
+                font-size: 0.7rem;
+            }
+        }
+
+        @media (max-height: 700px) {
+            .logo-wrapper {
+                width: 160px;
+                height: 160px;
+                margin-bottom: 1.2rem;
+            }
+            .logo-image {
+                width: 125px;
+                height: 125px;
+            }
+            .btn-gold {
+                font-size: 0.8rem;
+                padding: 0.5rem 1.8rem;
+            }
+        }
+
+        /* Scrollbar gizleme */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d4af37;
+            border-radius: 2px;
+        }
+    </style>
 </head>
 <body>
 
-  <!-- SABİT NAV -->
-  <nav class="sticky-nav">
-    <div class="nav-logo">
-      <!-- SİYAH ARKA PLAN LOGO (kendi klasörünüzden) -->
-      <img src="https://rohanamedi.github.io/kureysi/foto/siyah-arka-plan-logo.png" alt="Kureyşî Logo" style="background:#111;">
-      <span style="color:#d4af37; font-weight:600; font-size:1.1rem;">KUREYŞÎ</span>
-    </div>
-    <div class="nav-links">
-      <a href="index.html">Ana Sayfa</a>
-      <a href="tarihce.html">Tarihçemiz</a>
-      <a href="malbat.html">Malbatlar</a>
-      <a href="hikayeler.html">Sülale Hikayeleri</a>
-      <a href="atlas.html">Soyağacı Atlası</a>
-      <a href="bilgi-ekle.html">Bilgi Ekle</a>
-    </div>
-  </nav>
+    <div class="home-page">
 
-  <!-- HERO -->
-  <section class="hero" id="ana-sayfa">
-    <h1>KUREYŞÎ AŞİRETİ</h1>
-    <div class="sub">〓 Mazıdağı 〓</div>
-    <a href="bilgi-ekle.html" class="btn-gold">✦ Soyağacına İsim Yazdır ✦</a>
-  </section>
+        <!-- ===== KÖŞE KARTLARI (masaüstü) ===== -->
+        <div class="corner-cards">
+            <!-- Sol Üst: Tarihçemiz -->
+            <a href="tarihce.html" class="corner-card corner-tl" style="text-decoration:none;">
+                <h3><span class="icon">📜</span> Tarihçemiz</h3>
+                <p>Kureyşî Aşireti, asırlardır Mazıdağı ve çevresinde kök salmış, 7 köye ve büyük şehirlere dağılmış kadim bir sülaledir.</p>
+            </a>
 
-  <div class="container">
+            <!-- Sağ Üst: Ana Kollarımız -->
+            <a href="malbat.html" class="corner-card corner-tr" style="text-decoration:none;">
+                <h3><span class="icon">🏛️</span> Ana Kollarımız</h3>
+                <p>Aydar, İyikul ve Bulut olmak üzere 3 ana koldan oluşur. Her kol, kendi içinde derin bağlara sahip malbatları barındırır.</p>
+            </a>
 
-    <!-- TARİHÇE -->
-    <section id="tarihce">
-      <h2 class="section-title">Tarihçemiz · Manifesto</h2>
-      <div style="background:#171717; padding:1.8rem; border-radius:24px; border:1px solid #2a2a2a;">
-        <p style="font-size:1.05rem; color:#e0e0e0; line-height:1.9;">
-          <span class="gold">Kureyşî Aşireti</span>, asırlardır Mazıdağı ve çevresinde kök salmış, zamanla 7-8 köye (Birkê, Xuduri, Kûrê, Cevzat, Cinnê, Binxet) ve büyük şehirlere (Diyarbakır, Adana, İstanbul) dağılmış kadim bir sülaledir. 
-          Aşiretin merkezi bir ağası veya reisi yoktur; göçlerle birlikte yapı, her biri kendi içinde güçlü bağlara sahip <span class="gold">malbatlara</span> (büyük aile gruplarına) evrilmiştir. 
-          Bu dağınık ama birbirine kenetlenmiş yapı, Kureyşî kimliğinin sosyolojik zenginliğini oluşturur. 
-        </p>
-      </div>
-    </section>
+            <!-- Sol Alt: Sülale Hikayeleri -->
+            <a href="hikayeler.html" class="corner-card corner-bl" style="text-decoration:none;">
+                <h3><span class="icon">📖</span> Sülale Hikayeleri</h3>
+                <p>Büyük Göç, Şehit Musa'nın Bağdat Destanı... Kan bağıyla örülü destanlar yakında burada.</p>
+            </a>
 
-    <!-- MALBATLAR -->
-    <section id="malbatlar">
-      <h2 class="section-title">Malbatlarımız</h2>
-      <div class="grid-cards">
-        <!-- CARD 1 -->
-        <div class="card"><h3>Aydar Malbatı</h3><span class="badge">Çekirdek Hat · Diyarbakır</span><p><strong>Yerleşim:</strong> Birkê (Işıkyaka) &amp; Diyarbakır Sur (Kore Mah.)</p><p><span class="meta">Hane: Mala Hesenê Abdilkerîm, Mala Hacî Davûdê Hesen, Mala Hisênê Birkî</span></p><p class="meta">Ticaret: Geleneksel Peynircilik &amp; Hayvancılık</p></div>
-        <!-- CARD 2 -->
-        <div class="card"><h3>Aydın Malbatı</h3><span class="badge">Birkê Yerleşik · Abdo Kolu</span><p><strong>Yerleşim:</strong> Birkê (Işıkyaka)</p><p><span class="meta">Kökü: 1. Musa oğlu Abdo nesli (Hesenê Abdo / Hasan Aydın hattı)</span></p><p class="meta">Nüfus tescil hatasıyla farklı soyadı almış, 70 yıldır sarsılmaz kan bağıyla bağlı kandaş kolumuzdur.</p></div>
-        <!-- CARD 3 -->
-        <div class="card"><h3>Bulut Sülalesi</h3><span class="badge">Xuduri Kolu</span><p><strong>Yerleşim:</strong> Xuduri (Yeşilköy) &amp; Diyarbakır</p><p><span class="meta">Sektör: Müteahhitlik</span></p><p class="meta">Vefa: Dicle Üniversitesi Tıp Fakültesi Kalp ve Onkoloji Hastanelerine kazandırılan "Mehmet Sıddık Bulut anısına" hayrat bekleme salonları.</p></div>
-        <!-- CARD 4 -->
-        <div class="card"><h3>İyikul Malbatı</h3><span class="badge">Öz Kandaş</span><p>1. Musa dedenin öz kardeşi veya bavpîsi (baba amcası) kolundan gelen, resmi kütük tescilinde bu soyadı alan öz be öz Kureyşî kandaş ailemiz.</p></div>
-        <!-- CARD 5 -->
-        <div class="card"><h3>Kaçira Malbatı</h3><span class="badge">Tescil Aşamasında</span><p>Kureyşî gövdesinin ayrılmaz parçası olan, güncel hane reisleri ve soy hatları tescil aşamasında olan kandaş ailemiz.</p></div>
-        <!-- CARD 6 -->
-        <div class="card"><h3>Mala Balo</h3><span class="badge">Kûrê Kolu</span><p><strong>Yerleşim:</strong> Kûrê (Aşağıocak)</p><p class="meta">Avgevra Kevn'den yaşanan parçalanmada Kûrê köyüne yerleşen Kureyşî kolumuzdur.</p></div>
-      </div>
-    </section>
-
-    <!-- HİKAYELER (sadece özet, tam metinler hikayeler.html sayfasında) -->
-    <section id="hikayeler">
-      <h2 class="section-title">Sülale Hikayeleri</h2>
-      <div class="story-box">
-        <h3>📜 Büyük Göç ve "Ma Bû Xûna Kûrro"</h3>
-        <p>Avgevra Kevn köyündeki ahıra bırakılan cenaze husumeti, alınan 7 can ve sülalenin Mazıdağı köylerine dağılma süreci. Birkê köyü Kureyşîler tarafından sıfırdan inşa edilmiştir. İzol kökenli Hûsêynîler/Andiçlerin 1850 öncesi yerleşimi ve muhtarlık seçimlerindeki müttefiklik dengesi, aşiret hafızasında derin izler bırakmıştır.</p>
-      </div>
-      <div class="story-box">
-        <h3>⚔️ Şehit Musa'nın Bağdat Destanı</h3>
-        <p>1.7.1890 doğumlu Mehmet oğlu Musa, Hilafet sancağı altında Kut'ül Amâre zaferine giden süreçte İstihkam Eri olarak mücadele etmiş ve 14 Ocak 1916'da Bağdat 2. Hilal-i Ahmer Hastanesinde şehadet şerbetini içmiştir. Emanetlerine kardeşi Hasan sahip çıkmış, bu destan nesiller boyu anlatılmıştır.</p>
-      </div>
-      <div style="text-align:center; margin-top:1rem;">
-        <a href="hikayeler.html" style="color:#d4af37; text-decoration:underline; font-weight:500;">Tüm hikayeleri oku →</a>
-      </div>
-    </section>
-
-    <!-- SOYAĞACI ATLASI (özet) -->
-    <section id="atlas">
-      <h2 class="section-title">Soyağacı Atlası</h2>
-      <div class="atlas-area">
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 500'%3E%3Crect width='800' height='500' fill='%23131313'/%3E%3Ccircle cx='400' cy='100' r='40' fill='%23d4af37' opacity='0.8'/%3E%3Ctext x='400' y='110' text-anchor='middle' fill='%230d0d0d' font-weight='bold' font-size='22' font-family='serif'%3E1. MUSA%3C/text%3E%3Cline x1='400' y1='140' x2='200' y2='240' stroke='%23d4af37' stroke-width='2'/%3E%3Cline x1='400' y1='140' x2='600' y2='240' stroke='%23d4af37' stroke-width='2'/%3E%3Ccircle cx='200' cy='260' r='30' fill='%232a2a2a' stroke='%23d4af37' stroke-width='2'/%3E%3Ctext x='200' y='266' text-anchor='middle' fill='%23d4af37' font-size='14'%3EAydar%3C/text%3E%3Ccircle cx='600' cy='260' r='30' fill='%232a2a2a' stroke='%23d4af37' stroke-width='2'/%3E%3Ctext x='600' y='266' text-anchor='middle' fill='%23d4af37' font-size='14'%3EAydın%3C/text%3E%3Ccircle cx='300' cy='360' r='26' fill='%231f1f1f' stroke='%23b8962e' stroke-width='1.5'/%3E%3Ctext x='300' y='366' text-anchor='middle' fill='%23d4af37' font-size='12'%3EBulut%3C/text%3E%3Ccircle cx='500' cy='360' r='26' fill='%231f1f1f' stroke='%23b8962e' stroke-width='1.5'/%3E%3Ctext x='500' y='366' text-anchor='middle' fill='%23d4af37' font-size='12'%3Eİyikul%3C/text%3E%3Ccircle cx='100' cy='430' r='24' fill='%231f1f1f' stroke='%2399865e' stroke-width='1'/%3E%3Ctext x='100' y='436' text-anchor='middle' fill='%23d4af37' font-size='12'%3EKaçira%3C/text%3E%3Ccircle cx='700' cy='430' r='24' fill='%231f1f1f' stroke='%2399865e' stroke-width='1'/%3E%3Ctext x='700' y='436' text-anchor='middle' fill='%23d4af37' font-size='12'%3EMala Balo%3C/text%3E%3C/svg%3E"
-             alt="Soyağacı Atlası (şematik)" style="max-width:100%; background:#111;">
-        <div class="caption">Bu atlas, sülalemizin bilinen en üst kuşaklarından itibaren birbirine bağlanan kollarını göstermektedir. Detayları parmaklarınızla yakınlaştırarak inceleyebilirsiniz.</div>
-        <div style="margin-top:0.8rem;">
-          <a href="atlas.html" style="color:#d4af37; text-decoration:underline;">Atlası tam ekran incele →</a>
+            <!-- Sağ Alt: Soyağacı Nesilleri -->
+            <a href="atlas.html" class="corner-card corner-br" style="text-decoration:none;">
+                <h3><span class="icon">🌳</span> Soyağacı Nesilleri</h3>
+                <p>Musa Dede'nin çocukları ve amcalarıyla başlayan 3 nesillik soy ağacı. 3. nesilde soyadı kanunu ile bugünkü soyadlarımız şekillendi.</p>
+            </a>
         </div>
-      </div>
-    </section>
 
-    <!-- İLETİŞİM & BİLGİ EKLE (FORM) -->
-    <section id="form">
-      <h2 class="section-title">İletişim &amp; Bilgi Ekle</h2>
-      <div class="form-wrapper">
-        <!-- Google Forms Embed (DOĞRU VE ÇALIŞIR LINK) -->
-        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSec9WNw0Zju8gT7cPAqFOVSV6pcoRRoP9NXPHNC5rTCSSttow/viewform?embedded=true" width="100%" height="1200" frameborder="0" marginheight="0" marginwidth="0">Yükleniyor…</iframe>
-      </div>
-    </section>
+        <!-- ===== LOGO + YÖRÜNGELER ===== -->
+        <div class="logo-area">
+            <div class="logo-wrapper">
+                <!-- 10 Yörünge -->
+                <div class="orbit-container">
+                    <div class="orbit-ring"></div>
+                    <div class="orbit-ring"></div>
+                    <div class="orbit-ring"></div>
+                    <div class="orbit-ring"></div>
+                    <div class="orbit-ring"></div>
+                    <div class="orbit-ring"></div>
+                    <div class="orbit-ring"></div>
+                    <div class="orbit-ring"></div>
+                    <div class="orbit-ring"></div>
+                    <div class="orbit-ring"></div>
 
-    <!-- alt bilgi -->
-    <footer style="text-align:center; padding:2rem 0 0.8rem; border-top:1px solid #2a2a2a; margin-top:1.8rem; color:#6a6a6a; font-size:0.8rem;">
-      <span class="gold">KUREYŞÎ AŞİRETİ</span> · Mazıdağı / Diyarbakır · 2026
-    </footer>
-  </div>
+                    <!-- 17 Nokta (irili ufaklı) -->
+                    <div class="orbit-dot" style="width:6px;height:6px;top:8%;left:25%;animation-delay:0.1s;"></div>
+                    <div class="orbit-dot" style="width:10px;height:10px;top:15%;right:12%;animation-delay:0.4s;"></div>
+                    <div class="orbit-dot" style="width:4px;height:4px;bottom:20%;left:5%;animation-delay:0.7s;"></div>
+                    <div class="orbit-dot" style="width:8px;height:8px;bottom:8%;right:20%;animation-delay:1.0s;"></div>
+                    <div class="orbit-dot" style="width:5px;height:5px;top:45%;left:2%;animation-delay:0.3s;"></div>
+                    <div class="orbit-dot" style="width:12px;height:12px;top:40%;right:3%;animation-delay:0.6s;"></div>
+                    <div class="orbit-dot" style="width:7px;height:7px;bottom:45%;left:8%;animation-delay:0.9s;"></div>
+                    <div class="orbit-dot" style="width:9px;height:9px;bottom:35%;right:6%;animation-delay:1.2s;"></div>
+                    <div class="orbit-dot" style="width:3px;height:3px;top:5%;left:45%;animation-delay:0.2s;"></div>
+                    <div class="orbit-dot" style="width:11px;height:11px;top:3%;right:40%;animation-delay:0.5s;"></div>
+                    <div class="orbit-dot" style="width:6px;height:6px;bottom:5%;left:35%;animation-delay:0.8s;"></div>
+                    <div class="orbit-dot" style="width:8px;height:8px;bottom:3%;right:38%;animation-delay:1.1s;"></div>
+                    <div class="orbit-dot" style="width:5px;height:5px;top:55%;left:12%;animation-delay:0.15s;"></div>
+                    <div class="orbit-dot" style="width:7px;height:7px;top:50%;right:10%;animation-delay:0.45s;"></div>
+                    <div class="orbit-dot" style="width:10px;height:10px;bottom:55%;left:15%;animation-delay:0.75s;"></div>
+                    <div class="orbit-dot" style="width:4px;height:4px;bottom:50%;right:12%;animation-delay:1.05s;"></div>
+                    <div class="orbit-dot" style="width:6px;height:6px;top:25%;left:48%;animation-delay:0.35s;"></div>
+                </div>
+
+                <!-- Logo -->
+                <img src="https://rohanamedi.github.io/kureysi/foto/siyah-arka-plan-logo.png" alt="Kureyşî Aşireti" class="logo-image">
+            </div>
+
+            <!-- ===== BUTON ===== -->
+            <div class="btn-wrapper">
+                <a href="bilgi-ekle.html" class="btn-gold">
+                    ✦ Soyağacını Ekle
+                    <span class="arrow">→</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- ===== MOBİL SLIDER ===== -->
+        <div class="mobile-slider">
+            <div class="slider-track" id="sliderTrack">
+                <!-- Slide 1: Tarihçemiz -->
+                <div class="slider-slide" onclick="window.location.href='tarihce.html'">
+                    <h4>📜 Tarihçemiz</h4>
+                    <p>Kureyşî Aşireti, asırlardır Mazıdağı ve çevresinde kök salmış, 7 köye ve büyük şehirlere dağılmış kadim bir sülaledir.</p>
+                </div>
+                <!-- Slide 2: Ana Kollarımız -->
+                <div class="slider-slide" onclick="window.location.href='malbat.html'">
+                    <h4>🏛️ Ana Kollarımız</h4>
+                    <p>Aydar, İyikul ve Bulut olmak üzere 3 ana koldan oluşur. Her kol, kendi içinde derin bağlara sahip malbatları barındırır.</p>
+                </div>
+                <!-- Slide 3: Sülale Hikayeleri -->
+                <div class="slider-slide" onclick="window.location.href='hikayeler.html'">
+                    <h4>📖 Sülale Hikayeleri</h4>
+                    <p>Büyük Göç, Şehit Musa'nın Bağdat Destanı... Kan bağıyla örülü destanlar yakında burada.</p>
+                </div>
+                <!-- Slide 4: Soyağacı Nesilleri -->
+                <div class="slider-slide" onclick="window.location.href='atlas.html'">
+                    <h4>🌳 Soyağacı Nesilleri</h4>
+                    <p>Musa Dede'nin çocukları ve amcalarıyla başlayan 3 nesillik soy ağacı. 3. nesilde soyadı kanunu ile bugünkü soyadlarımız şekillendi.</p>
+                </div>
+            </div>
+            <div class="slider-dots" id="sliderDots">
+                <span class="slider-dot active" data-index="0"></span>
+                <span class="slider-dot" data-index="1"></span>
+                <span class="slider-dot" data-index="2"></span>
+                <span class="slider-dot" data-index="3"></span>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // ===== MOBİL SLIDER KONTROL =====
+        let currentSlide = 0;
+        const track = document.getElementById('sliderTrack');
+        const dots = document.querySelectorAll('.slider-dot');
+        const totalSlides = 4;
+
+        // Otomatik geçiş
+        let autoSlide = setInterval(() => {
+            goToSlide((currentSlide + 1) % totalSlides);
+        }, 4000);
+
+        // Dots tıklama
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                clearInterval(autoSlide);
+                goToSlide(index);
+                autoSlide = setInterval(() => {
+                    goToSlide((currentSlide + 1) % totalSlides);
+                }, 4000);
+            });
+        });
+
+        // Touch desteği
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        const slider = document.querySelector('.mobile-slider');
+        slider.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        slider.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const diff = touchStartX - touchEndX;
+            if (Math.abs(diff) > 50) {
+                clearInterval(autoSlide);
+                if (diff > 0 && currentSlide < totalSlides - 1) {
+                    goToSlide(currentSlide + 1);
+                } else if (diff < 0 && currentSlide > 0) {
+                    goToSlide(currentSlide - 1);
+                }
+                autoSlide = setInterval(() => {
+                    goToSlide((currentSlide + 1) % totalSlides);
+                }, 4000);
+            }
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            track.style.transform = `translateX(-${index * 25}%)`;
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }
+
+        // Slider'ı göster (mobilde görünür)
+        document.querySelector('.mobile-slider').style.display = 'block';
+    </script>
+
 </body>
 </html>

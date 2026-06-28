@@ -29,9 +29,6 @@
         .gold {
             color: #d4af37;
         }
-        .gold-border {
-            border-color: #d4af37;
-        }
 
         /* ===== ARKA PLAN ===== */
         body::before {
@@ -63,7 +60,7 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            padding: 2rem 1.5rem;
+            padding: 1rem;
             position: relative;
         }
 
@@ -86,7 +83,7 @@
             border: 1px solid rgba(212, 175, 55, 0.25);
             border-radius: 16px;
             padding: 1.2rem 1.5rem;
-            max-width: 280px;
+            max-width: 260px;
             transition: all 0.4s ease;
             cursor: pointer;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
@@ -102,7 +99,7 @@
 
         .corner-card h3 {
             color: #d4af37;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
             margin-bottom: 0.3rem;
             letter-spacing: 0.05em;
@@ -110,34 +107,21 @@
 
         .corner-card p {
             color: #c8c0b0;
-            font-size: 0.82rem;
+            font-size: 0.78rem;
             line-height: 1.5;
             margin: 0;
             font-weight: 300;
         }
 
         .corner-card .icon {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             margin-right: 0.4rem;
         }
 
-        /* Köşe pozisyonları */
-        .corner-tl {
-            top: 2rem;
-            left: 2rem;
-        }
-        .corner-tr {
-            top: 2rem;
-            right: 2rem;
-        }
-        .corner-bl {
-            bottom: 2rem;
-            left: 2rem;
-        }
-        .corner-br {
-            bottom: 2rem;
-            right: 2rem;
-        }
+        .corner-tl { top: 1.5rem; left: 1.5rem; }
+        .corner-tr { top: 1.5rem; right: 1.5rem; }
+        .corner-bl { bottom: 1.5rem; left: 1.5rem; }
+        .corner-br { bottom: 1.5rem; right: 1.5rem; }
 
         /* ===== LOGO ALANI ===== */
         .logo-area {
@@ -147,6 +131,8 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            width: 100%;
+            flex: 1;
             padding: 0.5rem;
         }
 
@@ -155,48 +141,68 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 320px;
-            height: 320px;
-            margin-bottom: 2.5rem;
+            width: 65vw;
+            max-width: 600px;
+            height: 65vw;
+            max-height: 600px;
+            margin-bottom: 2rem;
         }
 
-        /* ===== 7 YILDIZ (logo etrafında büyüyüp küçülen) ===== */
+        /* ===== 7 YILDIZ ===== */
         .star {
             position: absolute;
             color: #d4af37;
-            font-size: 1.8rem;
+            font-size: 2.2rem;
             pointer-events: none;
             animation: pulseStar 2.5s ease-in-out infinite;
             text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
         }
 
-        .star:nth-child(1) { top: 2%; left: 50%; transform: translateX(-50%); animation-delay: 0s; font-size: 2.2rem; }
-        .star:nth-child(2) { top: 15%; right: 5%; animation-delay: 0.35s; font-size: 1.6rem; }
-        .star:nth-child(3) { bottom: 15%; right: 5%; animation-delay: 0.7s; font-size: 1.9rem; }
-        .star:nth-child(4) { bottom: 2%; left: 50%; transform: translateX(-50%); animation-delay: 1.05s; font-size: 2.4rem; }
-        .star:nth-child(5) { bottom: 15%; left: 5%; animation-delay: 1.4s; font-size: 1.7rem; }
-        .star:nth-child(6) { top: 15%; left: 5%; animation-delay: 1.75s; font-size: 1.5rem; }
-        .star:nth-child(7) { top: 45%; left: 50%; transform: translateX(-50%); animation-delay: 2.1s; font-size: 1.3rem; opacity: 0.4; }
+        .star:nth-child(1) { top: 0%; left: 50%; transform: translateX(-50%); animation-delay: 0s; font-size: 2.6rem; }
+        .star:nth-child(2) { top: 12%; right: 2%; animation-delay: 0.35s; font-size: 1.8rem; }
+        .star:nth-child(3) { bottom: 12%; right: 2%; animation-delay: 0.7s; font-size: 2rem; }
+        .star:nth-child(4) { bottom: 0%; left: 50%; transform: translateX(-50%); animation-delay: 1.05s; font-size: 2.8rem; }
+        .star:nth-child(5) { bottom: 12%; left: 2%; animation-delay: 1.4s; font-size: 1.9rem; }
+        .star:nth-child(6) { top: 12%; left: 2%; animation-delay: 1.75s; font-size: 1.7rem; }
+        .star:nth-child(7) { top: 45%; left: 50%; transform: translateX(-50%); animation-delay: 2.1s; font-size: 1.4rem; opacity: 0.4; }
 
         @keyframes pulseStar {
-            0%, 100% { transform: scale(0.7); opacity: 0.4; }
-            50% { transform: scale(1.4); opacity: 1; }
+            0%, 100% { transform: scale(0.7); opacity: 0.3; }
+            50% { transform: scale(1.5); opacity: 1; }
         }
 
         .star:nth-child(1) { animation-name: pulseStar1; }
         .star:nth-child(4) { animation-name: pulseStar4; }
 
         @keyframes pulseStar1 {
-            0%, 100% { transform: translateX(-50%) scale(0.7); opacity: 0.4; }
-            50% { transform: translateX(-50%) scale(1.5); opacity: 1; }
-        }
-
-        @keyframes pulseStar4 {
-            0%, 100% { transform: translateX(-50%) scale(0.7); opacity: 0.4; }
+            0%, 100% { transform: translateX(-50%) scale(0.7); opacity: 0.3; }
             50% { transform: translateX(-50%) scale(1.6); opacity: 1; }
         }
 
-        /* ===== YÖRÜNGE BUTON ===== */
+        @keyframes pulseStar4 {
+            0%, 100% { transform: translateX(-50%) scale(0.7); opacity: 0.3; }
+            50% { transform: translateX(-50%) scale(1.7); opacity: 1; }
+        }
+
+        .logo-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(212, 175, 55, 0.5);
+            box-shadow: 0 0 60px rgba(212, 175, 55, 0.1);
+            position: relative;
+            z-index: 3;
+            background: #0a0a0a;
+            transition: all 0.5s ease;
+        }
+
+        .logo-image:hover {
+            box-shadow: 0 0 80px rgba(212, 175, 55, 0.2);
+            border-color: #d4af37;
+        }
+
+        /* ===== YÖRÜNGELİ BUTON ===== */
         .orbit-button-container {
             position: relative;
             display: inline-block;
@@ -204,7 +210,6 @@
             margin-top: 0.2rem;
         }
 
-        /* Ana Buton */
         .cosmic-btn {
             position: relative;
             background: linear-gradient(135deg, #141414 0%, #050505 100%);
@@ -231,7 +236,6 @@
             color: #0a0a0a;
         }
 
-        /* ---- PARÇACIK / NOKTA GENEL ÖZELLİKLERİ ---- */
         .particle {
             position: absolute;
             background-color: #d4af37;
@@ -246,7 +250,6 @@
         .d2 { animation-delay: -1.2s; }
         .d3 { animation-delay: -2.4s; }
 
-        /* ===== 10 YÖRÜNGE ===== */
         .orb-1 { animation: orbit-1 4.5s ease-in-out infinite; width: 6px; height: 6px; }
         @keyframes orbit-1 {
             0% { transform: rotateX(70deg) rotateZ(0deg) translateY(-110px) scale(0.7); z-index: 1; opacity: 0.5; }
@@ -317,7 +320,7 @@
             100% { transform: rotateX(-75deg) rotateY(10deg) rotateZ(0deg) translateX(95px) scale(1.2); z-index: 15; }
         }
 
-        /* ===== MOBİL SLIDER ===== */
+        /* ===== MOBİL SLIDER (sadece telefon) ===== */
         .mobile-slider {
             display: none;
             position: fixed;
@@ -388,43 +391,45 @@
         }
 
         /* ===== RESPONSIVE ===== */
-        @media (max-width: 1024px) {
-            .corner-card {
-                max-width: 220px;
-                padding: 0.9rem 1.2rem;
+
+        /* Masaüstü: slider görünmez, buton görünür */
+        @media (min-width: 769px) {
+            .mobile-slider {
+                display: none !important;
             }
-            .corner-card h3 {
-                font-size: 0.95rem;
+            .orbit-button-container {
+                display: inline-block;
             }
-            .corner-card p {
-                font-size: 0.72rem;
-            }
-            .corner-tl { top: 1.5rem; left: 1.5rem; }
-            .corner-tr { top: 1.5rem; right: 1.5rem; }
-            .corner-bl { bottom: 1.5rem; left: 1.5rem; }
-            .corner-br { bottom: 1.5rem; right: 1.5rem; }
-            .logo-wrapper { width: 270px; height: 270px; }
         }
 
+        /* Mobil: slider görünür, buton gizlenir */
         @media (max-width: 768px) {
             .corner-cards {
                 display: none;
             }
             .mobile-slider {
-                display: block;
+                display: block !important;
             }
+            .orbit-button-container {
+                display: none !important;
+            }
+
             .logo-wrapper {
-                width: 250px;
-                height: 250px;
-                margin-bottom: 2rem;
+                width: 75vw;
+                max-width: 400px;
+                height: 75vw;
+                max-height: 400px;
+                margin-bottom: 1.5rem;
             }
-            .star { font-size: 1.4rem !important; }
-            .cosmic-btn {
-                padding: 14px 32px;
-                font-size: 15px;
+
+            .star {
+                font-size: 1.6rem !important;
             }
+            .star:nth-child(1) { font-size: 2rem !important; }
+            .star:nth-child(4) { font-size: 2.2rem !important; }
+
             .home-page {
-                padding: 1rem 0.8rem;
+                padding: 0.5rem;
                 justify-content: center;
                 min-height: 100vh;
             }
@@ -432,52 +437,75 @@
 
         @media (max-width: 480px) {
             .logo-wrapper {
-                width: 210px;
-                height: 210px;
-                margin-bottom: 1.5rem;
+                width: 80vw;
+                max-width: 320px;
+                height: 80vw;
+                max-height: 320px;
+                margin-bottom: 1rem;
             }
-            .star { font-size: 1.1rem !important; }
-            .cosmic-btn {
-                padding: 12px 24px;
-                font-size: 13px;
-                letter-spacing: 2px;
+
+            .star {
+                font-size: 1.2rem !important;
             }
+            .star:nth-child(1) { font-size: 1.6rem !important; }
+            .star:nth-child(4) { font-size: 1.8rem !important; }
+
             .mobile-slider {
-                padding: 0.8rem 1rem;
-                bottom: 1rem;
+                padding: 0.7rem 0.9rem;
+                bottom: 0.8rem;
+                width: 95%;
             }
             .slider-slide h4 {
-                font-size: 0.85rem;
+                font-size: 0.8rem;
             }
             .slider-slide p {
-                font-size: 0.7rem;
+                font-size: 0.65rem;
             }
-            .orb-1 { animation-duration: 3.5s; }
-            .orb-2 { animation-duration: 2.8s; }
-            .orb-3 { animation-duration: 4s; }
-            .orb-4 { animation-duration: 3.2s; }
-            .orb-5 { animation-duration: 2.5s; }
-            .orb-6 { animation-duration: 5s; }
-            .orb-7 { animation-duration: 2.8s; }
-            .orb-8 { animation-duration: 3.8s; }
-            .orb-9 { animation-duration: 4.5s; }
-            .orb-10 { animation-duration: 2.2s; }
+        }
+
+        @media (max-width: 380px) {
+            .logo-wrapper {
+                width: 85vw;
+                max-width: 260px;
+                height: 85vw;
+                max-height: 260px;
+            }
+            .star {
+                font-size: 1rem !important;
+            }
+            .star:nth-child(1) { font-size: 1.3rem !important; }
+            .star:nth-child(4) { font-size: 1.4rem !important; }
+        }
+
+        /* Yüksek ekranlar için logo büyük */
+        @media (min-height: 900px) {
+            .logo-wrapper {
+                width: 55vw;
+                max-width: 650px;
+                height: 55vw;
+                max-height: 650px;
+            }
         }
 
         @media (max-height: 700px) {
             .logo-wrapper {
-                width: 190px;
-                height: 190px;
-                margin-bottom: 1.2rem;
+                width: 50vw;
+                max-width: 350px;
+                height: 50vw;
+                max-height: 350px;
+                margin-bottom: 1rem;
             }
-            .star { font-size: 1rem !important; }
+            .star {
+                font-size: 1.4rem !important;
+            }
+            .star:nth-child(1) { font-size: 1.8rem !important; }
+            .star:nth-child(4) { font-size: 2rem !important; }
             .cosmic-btn {
-                padding: 10px 24px;
-                font-size: 13px;
+                padding: 12px 30px;
+                font-size: 14px;
             }
         }
 
-        /* Scrollbar gizleme */
         ::-webkit-scrollbar {
             width: 4px;
         }
@@ -496,25 +524,21 @@
 
         <!-- ===== KÖŞE KARTLARI (masaüstü) ===== -->
         <div class="corner-cards">
-            <!-- Sol Üst: Tarihçemiz -->
             <a href="tarihce.html" class="corner-card corner-tl">
                 <h3><span class="icon">📜</span> Tarihçemiz</h3>
                 <p>Kureyşî Aşireti, asırlardır Mazıdağı ve çevresinde kök salmış, 7 köye ve büyük şehirlere dağılmış kadim bir sülaledir.</p>
             </a>
 
-            <!-- Sağ Üst: Ana Kollarımız -->
             <a href="malbat.html" class="corner-card corner-tr">
                 <h3><span class="icon">🏛️</span> Ana Kollarımız</h3>
                 <p>Aydar, İyikul ve Bulut olmak üzere 3 ana koldan oluşur. Her kol, kendi içinde derin bağlara sahip malbatları barındırır.</p>
             </a>
 
-            <!-- Sol Alt: Sülale Hikayeleri -->
             <a href="hikayeler.html" class="corner-card corner-bl">
                 <h3><span class="icon">📖</span> Sülale Hikayeleri</h3>
                 <p>Büyük Göç, Şehit Musa'nın Bağdat Destanı... Kan bağıyla örülü destanlar yakında burada.</p>
             </a>
 
-            <!-- Sağ Alt: Soyağacı Nesilleri -->
             <a href="atlas.html" class="corner-card corner-br">
                 <h3><span class="icon">🌳</span> Soyağacı Nesilleri</h3>
                 <p>Musa Dede'nin çocukları ve amcalarıyla başlayan 3 nesillik soy ağacı. 3. nesilde soyadı kanunu ile bugünkü soyadlarımız şekillendi.</p>
@@ -524,7 +548,6 @@
         <!-- ===== LOGO + 7 YILDIZ ===== -->
         <div class="logo-area">
             <div class="logo-wrapper">
-                <!-- 7 Yıldız (büyüyüp küçülen) -->
                 <span class="star">✦</span>
                 <span class="star">✦</span>
                 <span class="star">✦</span>
@@ -533,60 +556,48 @@
                 <span class="star">✦</span>
                 <span class="star">✦</span>
 
-                <!-- Logo -->
-                <img src="https://rohanamedi.github.io/kureysi/foto/siyah-arka-plan-logo.png" alt="Kureyşî Aşireti" style="width:100%; height:100%; border-radius:50%; object-fit:cover; border:3px solid rgba(212,175,55,0.5); box-shadow:0 0 60px rgba(212,175,55,0.1); position:relative; z-index:3; background:#0a0a0a;">
+                <img src="https://rohanamedi.github.io/kureysi/foto/siyah-arka-plan-logo.png" alt="Kureyşî Aşireti" class="logo-image">
             </div>
 
-            <!-- ===== YÖRÜNGELİ BUTON ===== -->
+            <!-- ===== YÖRÜNGELİ BUTON (sadece masaüstü) ===== -->
             <div class="orbit-button-container">
-                <!-- 10 Yörünge x 3 Nokta = 30 nokta -->
                 <div class="particle orb-1 d1"></div>
                 <div class="particle orb-1 d2"></div>
                 <div class="particle orb-1 d3"></div>
-
                 <div class="particle orb-2 d1"></div>
                 <div class="particle orb-2 d2"></div>
                 <div class="particle orb-2 d3"></div>
-
                 <div class="particle orb-3 d1"></div>
                 <div class="particle orb-3 d2"></div>
                 <div class="particle orb-3 d3"></div>
-
                 <div class="particle orb-4 d1"></div>
                 <div class="particle orb-4 d2"></div>
                 <div class="particle orb-4 d3"></div>
-
                 <div class="particle orb-5 d1"></div>
                 <div class="particle orb-5 d2"></div>
                 <div class="particle orb-5 d3"></div>
-
                 <div class="particle orb-6 d1"></div>
                 <div class="particle orb-6 d2"></div>
                 <div class="particle orb-6 d3"></div>
-
                 <div class="particle orb-7 d1"></div>
                 <div class="particle orb-7 d2"></div>
                 <div class="particle orb-7 d3"></div>
-
                 <div class="particle orb-8 d1"></div>
                 <div class="particle orb-8 d2"></div>
                 <div class="particle orb-8 d3"></div>
-
                 <div class="particle orb-9 d1"></div>
                 <div class="particle orb-9 d2"></div>
                 <div class="particle orb-9 d3"></div>
-
                 <div class="particle orb-10 d1"></div>
                 <div class="particle orb-10 d2"></div>
                 <div class="particle orb-10 d3"></div>
 
-                <!-- Buton -->
                 <a href="bilgi-ekle.html" class="cosmic-btn">✦ Soyağacını Ekle</a>
             </div>
         </div>
 
-        <!-- ===== MOBİL SLIDER ===== -->
-        <div class="mobile-slider">
+        <!-- ===== MOBİL SLIDER (sadece telefon) ===== -->
+        <div class="mobile-slider" id="mobileSlider">
             <div class="slider-track" id="sliderTrack">
                 <div class="slider-slide" onclick="window.location.href='tarihce.html'">
                     <h4>📜 Tarihçemiz</h4>
@@ -668,7 +679,7 @@
             });
         }
 
-        document.querySelector('.mobile-slider').style.display = 'block';
+        // Mobil slider'ı göster (CSS ile kontrol ediliyor)
     </script>
 
 </body>
